@@ -201,7 +201,7 @@ class JUnitFormatter implements Formatter
     public function beforeScenario(ScenarioTested $event)
     {
         $this->currentTestcase = $this->currentTestsuite->addChild('testcase');
-        $this->currentTestcase->addAttribute('name', $event->getScenario()->getTitle());
+        $this->currentTestcase->addAttribute('name', $event->getFeature()->getFile() . ':' . $event->getScenario()->getLine());
 
         $this->testcaseTimer->start();
     }
@@ -228,7 +228,7 @@ class JUnitFormatter implements Formatter
     public function beforeExample(ScenarioTested $event)
     {
         $this->currentTestcase = $this->currentTestsuite->addChild('testcase');
-        $this->currentTestcase->addAttribute('name', $this->currentOutlineTitle . ' Line #' . $event->getScenario()->getLine());
+        $this->currentTestcase->addAttribute('name', $event->getFeature()->getFile(). ':' . $event->getScenario()->getLine());
 
         $this->testcaseTimer->start();
     }
